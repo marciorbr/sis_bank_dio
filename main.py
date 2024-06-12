@@ -17,16 +17,16 @@ def depositar(saldo, valor, extrato, /):
 
 def sacar(*, saldo, valor, extrato, limite, numero_saques, limite_saques):
     if numero_saques > limite_saques:
-        print("Operação não permitida, saldo insuficiente.")
-    elif valor > saldo:
         print("Operação não realizada! Você excedeu o número de saques permitidos.")
+    elif valor > saldo:
+        print("Operação não permitida, saldo insuficiente.")
     elif valor > limite:
         print("Operação não permitida! Valor do saque não pode ser maio que 500.00")
     else:
         saldo -= valor
         extrato += f"Saque de: R$ {valor:.2f}\n"
         numero_saques += 1
-    return saldo, extrato
+    return saldo, extrato, numero_saques
 
 
 saldo = 0
@@ -50,7 +50,7 @@ while True:
 
         valor = float(input("Digite o valor do saque.\n"))
 
-        saldo, extrato = sacar(saldo=saldo, valor=valor, extrato=extrato, limite=limite, numero_saques=numero_saques, limite_saques=LIMITE_SAQUE)
+        saldo, extrato, numero_saques = sacar(saldo=saldo, valor=valor, extrato=extrato, limite=limite, numero_saques=numero_saques, limite_saques=LIMITE_SAQUE)
 
     elif opcao == "e":
 
