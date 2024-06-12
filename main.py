@@ -7,7 +7,6 @@ menu = """
 
 => """
 
-
 def depositar(saldo, valor, extrato, /):
     if valor < 0:
         print("Operação não realizada!, Não é possível depositar valores negativos.")
@@ -43,13 +42,13 @@ while True:
 
     if opcao == "d":
         
-        valor = float(input("Digite o valor a do depósito."))
+        valor = float(input("Digite o valor a do depósito.\n"))
 
         saldo, extrato = depositar(saldo, valor, extrato)
 
     elif opcao == "s":
 
-        valor = float(input("Digite o valor do saque."))
+        valor = float(input("Digite o valor do saque.\n"))
 
         saldo, extrato = sacar(saldo=saldo, valor=valor, extrato=extrato, limite=limite, numero_saques=numero_saques, limite_saques=LIMITE_SAQUE)
 
