@@ -28,6 +28,14 @@ def sacar(*, saldo, valor, extrato, limite, numero_saques, limite_saques):
         numero_saques += 1
     return saldo, extrato, numero_saques
 
+def get_extrato(saldo,/,*,extrato):
+    print("\n===================== EXTRATO ======================")
+    print("\n------------------ MOVIMENTAÇÔES --------------------")
+    print(extrato)
+    print("----------------------- SALDO -----------------------\n")
+    print(f"Saldo em conta: R$ {saldo:.2f}\n")
+    # extrato += f"Saldo em conta: R$ {saldo:.2f}\n"
+    # print(extrato)
 
 saldo = 0
 limite = 500
@@ -54,8 +62,7 @@ while True:
 
     elif opcao == "e":
 
-        extrato += f"Saldo em conta: R$ {saldo:.2f}\n"
-        print(extrato)
+        get_extrato(saldo, extrato=extrato)
 
     elif opcao == "q":
 
