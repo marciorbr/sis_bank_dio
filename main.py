@@ -1,9 +1,10 @@
 menu = """
 
-[d] Deposito
-[s] Sacar
-[e] Extrato
-[q] Sair
+[c ] Cadastrar Cliente
+[d ] Deposito
+[s ] Sacar
+[e ] Extrato
+[q ] Sair
 
 => """
 
@@ -37,12 +38,19 @@ def get_extrato(saldo,/,*,extrato):
     # extrato += f"Saldo em conta: R$ {saldo:.2f}\n"
     # print(extrato)
 
+def cadastrar_cliente(clientes, cpf, nome, dt_nascimento, rua, bairro, cidade, uf):
+    clientes[cpf] = {'nome': nome, 'dt_nascimento': dt_nascimento, 'enderco':{'rua':rua, 'bairro': bairro, 'cidade': cidade, 'uf': uf}}
+    print('Cliente dadastrado com sucesso!')
+    return clientes
+
 saldo = 0
 limite = 500
 extrato = """
 """
 numero_saques = 1
 LIMITE_SAQUE = 3
+
+clientes = {}
 
 while True:
 
@@ -63,6 +71,21 @@ while True:
     elif opcao == "e":
 
         get_extrato(saldo, extrato=extrato)
+
+    elif opcao == "c":
+        print("Digite os dados do cliente!\n")
+        cpf = int(input("Digite o CPF no formato - 111111\n"))
+        if cpf in clientes:
+            print("Já existe um cliente cadastrado com este CPF!")
+        else:
+            nome = str(input("Digite o nome do cliente\n"))
+            dt_nascimento = str(input("Digite a data de nascimento no formato - 05/05/1955\n"))
+            rua = str(input("Digite o nome da rua\n"))
+            bairro = str(input("Digite o nome do bairro\n"))
+            cidade = str(input("Digite o nome da cidade\n"))
+            uf = str(input("Digite o Estado UF\n"))
+
+            clientes = cadastrar_cliente(clientes, cpf, nome, dt_nascimento, rua, bairro, cidade, uf)
 
     elif opcao == "q":
 
