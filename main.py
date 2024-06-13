@@ -1,6 +1,7 @@
 menu = """
 
 [c ] Cadastrar Cliente
+[cc] Cadastrar Conta Corrente
 [d ] Deposito
 [s ] Sacar
 [e ] Extrato
@@ -43,14 +44,22 @@ def cadastrar_cliente(clientes, cpf, nome, dt_nascimento, rua, bairro, cidade, u
     print('Cliente dadastrado com sucesso!')
     return clientes
 
+def cadastrar_conta_corrente(contas, contador_numero_conta , agencia, cpf):
+    contador_numero_conta += 1
+    contas[contador_numero_conta] = {'cpf': cpf,'agencia': agencia}
+    return contas
+
 saldo = 0
 limite = 500
 extrato = """
 """
 numero_saques = 1
 LIMITE_SAQUE = 3
+AGENCIA = '0001'
+contador_numero_conta = 0
 
 clientes = {}
+contas = {}
 
 while True:
 
@@ -73,6 +82,7 @@ while True:
         get_extrato(saldo, extrato=extrato)
 
     elif opcao == "c":
+
         print("Digite os dados do cliente!\n")
         cpf = int(input("Digite o CPF no formato - 111111\n"))
         if cpf in clientes:
@@ -86,6 +96,17 @@ while True:
             uf = str(input("Digite o Estado UF\n"))
 
             clientes = cadastrar_cliente(clientes, cpf, nome, dt_nascimento, rua, bairro, cidade, uf)
+
+    elif opcao == "cc":
+
+        print("Para cadastrar uma conta corrente digite os dados abaixo\n")
+        cpf = int(input("Digite o CPF do cliente no formato - 111111\n"))
+        if cpf not in clientes:
+            print("Não existe cliente cadastrado com esse CPF\n")
+            print("PRIMEIRO EFETUE O CADASTRO DO CLIENTE!")
+        else:
+            agencia = AGENCIA
+            cadastrar_conta_corrente(contas, contador_numero_conta , agencia, cpf)
 
     elif opcao == "q":
 
